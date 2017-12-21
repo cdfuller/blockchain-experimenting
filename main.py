@@ -114,6 +114,13 @@ def index():
     return f"Cody's blockchain node #{node_identifier}"
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=3000)
-    p = randint(3000, 5000)
-    app.run(host='0.0.0.0', port=p, debug=True)
+    from argparse import ArgumentParser
+
+    parser = ArgumentParser()
+    parser.add_argument('-p', '--port', default=3333, type=int, help='port to listen on')
+    parser.add_argument('-d', '--debug', default=False, action='store_true', help='turn on debugging. default=False')
+    args = parser.parse_args()
+    port = args.port
+    debug = args.debug
+    # app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=debug)
