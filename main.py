@@ -19,7 +19,10 @@ def mine():
     # Run the proof of work algorithm to get the next proof
     last_block = blockchain.last_block
     last_proof = last_block['proof']
+    import time
+    start_time = time.time()
     proof = blockchain.proof_of_work(last_proof)
+    end_time = time.time()
 
     # We get a reward for finding the proof!
     # The sender is "0" to signify that this node has mined a new coin
@@ -40,6 +43,7 @@ def mine():
         'transactions': block['transactions'],
         'proof': block['proof'],
         'previous_hash': block['previous_hash'],
+        'time_to_mine': end_time - start_time,
     }
 
     return jsonify(response), 200
